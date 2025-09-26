@@ -25,3 +25,38 @@ enum Role {
   MASTER
   ADMIN
 }
+
+model Post {
+  id           Int      @id @default(autoincrement())
+  title        String
+  listCoverUrl String   
+  postCoverUrl String   
+  content      Json    
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Partner {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  imageUrl    String
+  description String   @db.Text
+  createdAt   DateTime @default(now())
+}
+
+model Position {
+  id         Int      @id @default(autoincrement())
+  memberName String  
+  title      String  
+  imageUrl   String
+  createdAt  DateTime @default(now())
+}
+
+model SiteInfo {
+  id            Int     @id @default(1) 
+  aboutText     String  @db.Text
+  contactPhone1 String
+  contactPhone2 String? 
+  contactEmail  String
+  updatedAt     DateTime @updatedAt
+}

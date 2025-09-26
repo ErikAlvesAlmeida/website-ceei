@@ -3,7 +3,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const { verifyToken, isMaster } = require('../middleware/authMiddleware');
 
-// A rota de registro é protegida, exigindo um token válido de um usuário MASTER
+router.patch('/me', verifyToken, userController.updateCurrentUser);
+router.delete('/cleanup', verifyToken, isMaster, userController.cleanupAdminUsers);
 router.post('/register', verifyToken, isMaster, userController.registerUser);
+router.delete('/:id', verifyToken, isMaster, userController.deleteUser);
 
 module.exports = router;

@@ -29,3 +29,82 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ message: 'Erro interno no servidor.', error: error.message });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  const idToDelete = parseInt(req.params.id);
+
+  if (idToDelete === 1) {
+    return res.status(403).json({ message: 'A conta do super usuário não pode ser excluída.' });
+  }
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: idToDelete },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+
+    await prisma.user.delete({
+      where: { id: idToDelete },
+    });
+
+    res.status(204).send();
+
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno no servidor.', error: error.message });
+  }
+};
+
+exports.updateCurrentUser = async (req, res) => {
+  const userId = req.user.userId;
+  const { name, password } = req.body;
+
+  const dataToUpdate = {};
+
+  if (name) {
+    dataToUpdate.name = name;
+  }
+
+  if (password) {
+    dataToUpdate.password = await bcrypt.hash(password, 10);
+  }
+
+  if (Object.keys(dataToUpdate).length === 0) {
+    return res.status(400).json({ message: 'Nenhum dado para atualizar foi fornecido (nome ou senha).' });
+  }
+
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: dataToUpdate,
+    });
+
+    const { password: _, ...userWithoutPassword } = updatedUser;
+    res.status(200).json(userWithoutPassword);
+
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno no servidor.', error: error.message });
+  }
+};
+
+exports.cleanupAdminUsers = async (req, res) => {
+  try {
+    const deleteResult = await prisma.user.deleteMany({
+      where: {
+        role: {
+          not: 'MASTER',
+        },
+      },
+    });
+
+    res.status(200).json({
+      message: 'Operação de limpeza concluída com sucesso.',
+      deletedCount: deleteResult.count,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno no servidor.', error: error.message });
+  }
+};

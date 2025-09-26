@@ -1,4 +1,3 @@
-// prisma/seed.js
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
@@ -22,6 +21,19 @@ async function main() {
       role: 'MASTER',
     },
   });
+
+  const siteInfo = await prisma.siteInfo.upsert({
+    where: { id: 1 },
+    update: {}, 
+    create: {
+      aboutText: 'Este é o texto inicial sobre o CEEI. Edite-o no painel de administração!',
+      contactPhone1: '(00) 00000-0000',
+      contactPhone2: '(00) 11111-1111',
+      contactEmail: 'contato.inicial@ceei.com.br',
+    },
+  });
+
+  console.log('Informações do site criadas ou já existentes:', siteInfo);
 
   console.log('Super Usuário criado ou já existente:', masterUser);
 }
