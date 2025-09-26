@@ -1,0 +1,36 @@
+{
+  "name": "website-ceei",
+  "version": "1.0.0",
+  "description": "Repositório para a prototipação do site do Centro de Engenharia Elétrica e Informática da UFCG.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErikAlvesAlmeida/website-ceei.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErikAlvesAlmeida/website-ceei/issues"
+  },
+  "homepage": "https://github.com/ErikAlvesAlmeida/website-ceei#readme",
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.2"
+  }
+}
