@@ -1,12 +1,16 @@
 const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const masterUserLogin = '23984716';
-
-  const masterUserPassword = 'change-this-super-secret-password';
+  const masterUserLogin = process.env.MASTER_USER_LOGIN;
+  const masterUserPassword = process.env.MASTER_USER_PASSWORD;
+  
+  if (!masterUserLogin || !masterUserPassword) {
+    throw new Error('As variáveis de ambiente MASTER_USER_LOGIN e MASTER_USER_PASSWORD precisam ser definidas no .env');
+  }
 
   const hashedPassword = await bcrypt.hash(masterUserPassword, 10);
 
