@@ -1,21 +1,223 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%- include('partials/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= pageTitle %>
-    </title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    <main>
+        <section class="hero-section d-flex align-items-center justify-content-center">
+            <div class="hero-content text-center">
+                <h1 class="display-1 fw-bold">CEEI</h1>
+            </div>
+        </section>
 
-<body>
+        <section id="noticias" class="py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 text-ceei-primary">ÚLTIMAS NOTÍCIAS</h1>
+                <div class="row">
 
-    <h1>Servidor do CEEI Funcionando!</h1>
-    <p>O próximo passo é configurar o banco de dados com o Prisma.</p>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/images/RankingInternacional.jpg" class="card-img-top" alt="Capa da notícia 1">
+                        </div>
+                    </div>
 
-    <script src="/js/main.js"></script>
-</body>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/images/MarioHatori.jpg" class="card-img-top" alt="Capa da notícia 2">
+                        </div>
+                    </div>
 
-</html>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <img src="/images/RedesNeurais.jpg" class="card-img-top" alt="Capa da notícia 3">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="text-center mt-4">
+                    <a href="/blog" class="btn btn-primary btn-lg">VER MAIS</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="mb-4 text-ceei-primary">O CEEI</h1>
+                        <p class="lead mb-5 mx-auto text-ceei-primary" style="max-width: 800px;">
+                            Este é um texto provisório sobre o Centro de Engenharia Elétrica e Informática. Ele será
+                            substituído pelo conteúdo dinâmico cadastrado pelo administrador no painel. O objetivo é
+                            fornecer uma visão geral sobre a missão, valores e história do centro.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-4 about-card">
+                        <img src="https://via.placeholder.com/400x300.png?text=Imagem+1" class="img-fluid"
+                            alt="Imagem descritiva 1">
+                    </div>
+                    <div class="col-md-4 mb-4 about-card">
+                        <img src="https://via.placeholder.com/400x300.png?text=Imagem+2" class="img-fluid"
+                            alt="Imagem descritiva 2">
+                    </div>
+                    <div class="col-md-4 mb-4 about-card">
+                        <img src="https://via.placeholder.com/400x300.png?text=Imagem+3" class="img-fluid"
+                            alt="Imagem descritiva 3">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="unidades-academicas" class="py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 text-ceei-primary">UNIDADES ACADÊMICAS</h1>
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <a href="http://www.dee.ufcg.edu.br/" target="_blank" class="unit-card">
+                            <img src="/images/UAEE.jpg" class="img-fluid rounded shadow-sm"
+                                alt="Unidade Acadêmica de Engenharia Elétrica">
+                            <p class="text-center mt-3 fw-bold text-ceei-primary">Unidade Acadêmica de Engenharia
+                                Elétrica</p>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <a href="http://www.dsc.ufcg.edu.br/" target="_blank" class="unit-card">
+                            <img src="/images/UASC.jpg" class="img-fluid rounded shadow-sm"
+                                alt="Unidade Acadêmica de Sistemas e Computação">
+                            <p class="text-center mt-3 fw-bold text-ceei-primary">Unidade Acadêmica de Sistemas e
+                                Computação</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="orgaos-suplementares" class="py-5 bg-light">
+            <div class="container">
+                <h1 class="text-center mb-5 text-ceei-primary">ÓRGÃOS SUPLEMENTARES</h1>
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm unit-card">
+                            <img src="/images/Embrapii.jpg" class="card-img-top" alt="Logo do Órgão 1">
+                            <div class="card-body text-center">
+                                <p class="card-text text-ceei-primary">EMBRAPII – desenvolve projetos na área de
+                                    Software e Automação. A UE CEEI-UFCG tem mais de 130 projetos contratados com mais
+                                    de 70 empresas parceiras da indústria, em diversos domínios de aplicação, incluindo
+                                    saúde, entretenimento, eletroeletrônicos, alimentos, educação, comércio, jurídico,
+                                    transportes, segurança, energia e TIC.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm unit-card">
+                            <img src="/images/Virtus.jpg" class="card-img-top" alt="Logo do Órgão 2">
+                            <div class="card-body text-center">
+                                <p class="card-text text-ceei-primary">VIRTUS – O Núcleo de Pesquisa, Desenvolvimento e
+                                    Inovação em Tecnologia da Informação, Comunicação e Automação executa projetos de
+                                    Lei de Informática, EMBRAPII, ANP, dentre outros mecanismos de incentivo e conta com
+                                    parceiros da indústria, nas mais diversas áreas de tecnologia da informação,
+                                    comunicação e automação.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="inova" class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10 text-center">
+
+                        <h1 class="mb-4 text-ceei-primary">PROGRAMA INOVA</h1>
+
+                        <p class="lead mb-5 text-ceei-primary">
+                            Descrição sobre o Programa INOVA, destacando sua importância, objetivos e como ele se
+                            integra às atividades do CEEI. Este texto pode ser um pouco mais longo, detalhando os
+                            projetos e as parcerias que o programa fomenta para a inovação tecnológica e o
+                            empreendedorismo na universidade.
+                        </p>
+
+                        <img src="/images/INOVA.png" class="img-fluid" alt="Programa INOVA">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="parceiros" class="py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 text-ceei-primary">PARCEIROS</h1>
+                <div class="row align-items-center justify-content-center g-5">
+
+                    <div class="col-lg-2 col-md-3 col-6 text-center">
+                        <div class="partner-logo" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Descrição do Parceiro 1 que virá do banco de dados.">
+                            <img src="https://via.placeholder.com/150x80.png?text=Parceiro+1" class="img-fluid"
+                                alt="Logo do Parceiro 1">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-6 text-center">
+                        <div class="partner-logo" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Descrição do Parceiro 2 que virá do banco de dados.">
+                            <img src="https://via.placeholder.com/150x80.png?text=Parceiro+2" class="img-fluid"
+                                alt="Logo do Parceiro 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="novidades" class="py-5 bg-light">
+            <div class="container text-center">
+                <h2 class="text-center mb-5 text-ceei-primary">NOVIDADES DO CEEI</h2>
+                <div class="p-5 border rounded">
+                    <p class="lead text-ceei-primary">O feed do Instagram será incorporado aqui.</p>
+                    <small>Isso geralmente é feito com um widget de um serviço externo (como Elfsight, Lightwidget) para
+                        simplificar a integração.</small>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 text-ceei-primary">CONTATOS</h1>
+                <div class="row">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="ratio ratio-16x9">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.016335194883!2d-35.90898588574999!3d-7.23849187301078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac21c272a0c647%3A0x86333c8fed92a731!2sCentro%20de%20Engenharia%20El%C3%A9trica%20e%20Inform%C3%A1tica%20-%20CEEI%20UFCG!5e0!3m2!1spt-BR!2sbr!4v1672546812345"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <form id="contact-form">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Seu Nome</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Seu Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Assunto</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mensagem</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>

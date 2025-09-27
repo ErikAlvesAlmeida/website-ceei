@@ -1,0 +1,91 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+.bg-ceei-primary {
+  background-color: #0174AF !important;
+}
+.text-ceei-primary {
+  color: #0174AF !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: #FFFFFF;
+}
+.navbar {
+  background-color: transparent; 
+  transition: background-color 0.4s ease-in-out; 
+}
+.navbar.scrolled {
+  background-color: #0174AF; 
+}
+
+.hero-section {
+  position: relative;
+  min-height: 65vh; 
+  background: url('/images/capaCEEI.jpg') no-repeat center center;
+  background-size: cover;
+  color: white;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0174AF; 
+  opacity: 0.7; 
+}
+
+.hero-content {
+  position: relative; 
+  z-index: 1;
+}
+
+.about-card img {
+  transition: transform 0.3s ease-in-out;
+  border-radius: 0.5rem; 
+}
+
+.about-card:hover img {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #0174AF;
+  border-color: #0174AF;
+}
+
+.btn-primary:hover {
+  background-color: #015c8c;
+  border-color: #015c8c;
+}
+
+.btn-primary:active, .btn-primary:focus {
+  background-color: #015c8c;
+  border-color: #015c8c;
+  box-shadow: 0 0 0 0.25rem rgba(1, 116, 175, 0.5); 
+}
+
+.unit-card {
+  text-decoration: none; 
+  color: #212529; 
+  display: block; 
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.unit-card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; 
+}
+
+.partner-logo img {
+  max-width: 150px; 
+  filter: grayscale(100%); 
+  transition: all 0.3s ease-in-out;
+}
+
+.partner-logo:hover img {
+  filter: grayscale(0%); 
+  transform: scale(1.1); 
+}
