@@ -9,6 +9,8 @@ const postRoutes = require('./src/routes/postRoutes');
 const partnerRoutes = require('./src/routes/partnerRoutes');
 const positionRoutes = require('./src/routes/positionRoutes');
 const siteInfoRoutes = require('./src/routes/siteInfoRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
+const formRoutes = require('./src/routes/formRoutes');
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use('/api/posts', postRoutes);
 app.use('/api/partners', partnerRoutes);
 app.use('/api/positions', positionRoutes);
 app.use('/api/site-info', siteInfoRoutes);
+app.use('/', adminRoutes);
+app.use('/api/contact', formRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -10,27 +10,10 @@
         <section id="noticias" class="py-5">
             <div class="container">
                 <h1 class="text-center mb-5 text-ceei-primary">ÚLTIMAS NOTÍCIAS</h1>
-                <div class="row">
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm">
-                            <img src="/images/RankingInternacional.jpg" class="card-img-top" alt="Capa da notícia 1">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm">
-                            <img src="/images/MarioHatori.jpg" class="card-img-top" alt="Capa da notícia 2">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card border-0 shadow-sm">
-                            <img src="/images/RedesNeurais.jpg" class="card-img-top" alt="Capa da notícia 3">
-                        </div>
-                    </div>
-
+                <div class="row" id="latest-posts-container">
                 </div>
+
                 <div class="text-center mt-4">
                     <a href="/blog" class="btn btn-primary btn-lg">VER MAIS</a>
                 </div>
@@ -40,12 +23,10 @@
         <section id="sobre" class="py-5 bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 text-center">
-                        <h1 class="mb-4 text-ceei-primary">O CEEI</h1>
-                        <p class="lead mb-5 mx-auto text-ceei-primary" style="max-width: 800px;">
-                            Este é um texto provisório sobre o Centro de Engenharia Elétrica e Informática. Ele será
-                            substituído pelo conteúdo dinâmico cadastrado pelo administrador no painel. O objetivo é
-                            fornecer uma visão geral sobre a missão, valores e história do centro.
+                    <div class="col-12">
+                        <h2 class="text-center mb-4 text-ceei-primary">O CEEI</h2>
+                        <p class="lead mb-5 mx-auto text-ceei-primary text-justify" style="max-width: 800px;"
+                            id="about-text-placeholder">
                         </p>
                     </div>
                 </div>
@@ -100,8 +81,9 @@
                     <div class="col-lg-5 col-md-6 mb-4">
                         <div class="card h-100 shadow-sm unit-card">
                             <img src="/images/Embrapii.jpg" class="card-img-top" alt="Logo do Órgão 1">
-                            <div class="card-body text-center">
-                                <p class="card-text text-ceei-primary">EMBRAPII – desenvolve projetos na área de
+                            <div class="card-body">
+                                <p class="card-text text-ceei-primary text-justify">EMBRAPII – desenvolve projetos na
+                                    área de
                                     Software e Automação. A UE CEEI-UFCG tem mais de 130 projetos contratados com mais
                                     de 70 empresas parceiras da indústria, em diversos domínios de aplicação, incluindo
                                     saúde, entretenimento, eletroeletrônicos, alimentos, educação, comércio, jurídico,
@@ -113,8 +95,9 @@
                     <div class="col-lg-5 col-md-6 mb-4">
                         <div class="card h-100 shadow-sm unit-card">
                             <img src="/images/Virtus.jpg" class="card-img-top" alt="Logo do Órgão 2">
-                            <div class="card-body text-center">
-                                <p class="card-text text-ceei-primary">VIRTUS – O Núcleo de Pesquisa, Desenvolvimento e
+                            <div class="card-body">
+                                <p class="card-text text-ceei-primary text-justify">VIRTUS – O Núcleo de Pesquisa,
+                                    Desenvolvimento e
                                     Inovação em Tecnologia da Informação, Comunicação e Automação executa projetos de
                                     Lei de Informática, EMBRAPII, ANP, dentre outros mecanismos de incentivo e conta com
                                     parceiros da indústria, nas mais diversas áreas de tecnologia da informação,
@@ -130,11 +113,11 @@
         <section id="inova" class="py-5">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-10 text-center">
+                    <div class="col-lg-8 col-md-10">
 
-                        <h1 class="mb-4 text-ceei-primary">PROGRAMA INOVA</h1>
+                        <h1 class="mb-4 text-ceei-primary text-center">PROGRAMA INOVA</h1>
 
-                        <p class="lead mb-5 text-ceei-primary">
+                        <p class="lead mb-5 text-ceei-primary text-justify">
                             Descrição sobre o Programa INOVA, destacando sua importância, objetivos e como ele se
                             integra às atividades do CEEI. Este texto pode ser um pouco mais longo, detalhando os
                             projetos e as parcerias que o programa fomenta para a inovação tecnológica e o
@@ -147,32 +130,17 @@
                 </div>
             </div>
         </section>
-        <section id="parceiros" class="py-5">
+        <section id="parceiros" class="py-5 bg-ceei-primary">
             <div class="container">
-                <h1 class="text-center mb-5 text-ceei-primary">PARCEIROS</h1>
-                <div class="row align-items-center justify-content-center g-5">
-
-                    <div class="col-lg-2 col-md-3 col-6 text-center">
-                        <div class="partner-logo" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Descrição do Parceiro 1 que virá do banco de dados.">
-                            <img src="https://via.placeholder.com/150x80.png?text=Parceiro+1" class="img-fluid"
-                                alt="Logo do Parceiro 1">
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-6 text-center">
-                        <div class="partner-logo" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Descrição do Parceiro 2 que virá do banco de dados.">
-                            <img src="https://via.placeholder.com/150x80.png?text=Parceiro+2" class="img-fluid"
-                                alt="Logo do Parceiro 2">
-                        </div>
-                    </div>
+                <h1 class="text-center mb-5 text-white">PARCEIROS</h1>
+                <div class="row align-items-center justify-content-center g-5" id="partners-container">
                 </div>
             </div>
         </section>
 
         <section id="novidades" class="py-5 bg-light">
             <div class="container text-center">
-                <h2 class="text-center mb-5 text-ceei-primary">NOVIDADES DO CEEI</h2>
+                <h1 class="text-center mb-5 text-ceei-primary">NOVIDADES DO CEEI</h1>
                 <div class="p-5 border rounded">
                     <p class="lead text-ceei-primary">O feed do Instagram será incorporado aqui.</p>
                     <small>Isso geralmente é feito com um widget de um serviço externo (como Elfsight, Lightwidget) para
@@ -181,37 +149,38 @@
             </div>
         </section>
 
-        <section id="contato" class="py-5">
+        <section id="contato" class="py-5 bg-ceei-primary">
             <div class="container">
-                <h1 class="text-center mb-5 text-ceei-primary">CONTATOS</h1>
+                <h1 class="text-center mb-5 text-white">CONTATOS</h1>
                 <div class="row">
                     <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="ratio ratio-16x9">
+                        <div class="ratio ratio-16x9 rounded overflow-hidden h-100">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.016335194883!2d-35.90898588574999!3d-7.23849187301078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac21c272a0c647%3A0x86333c8fed92a731!2sCentro%20de%20Engenharia%20El%C3%A9trica%20e%20Inform%C3%A1tica%20-%20CEEI%20UFCG!5e0!3m2!1spt-BR!2sbr!4v1672546812345"
-                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.2423917198266!2d-35.91045035886577!3d-7.2131667864125095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ac1e2cb913e763%3A0xb201f40a3363c146!2sBIC%20-%20Electrical%20Engineering%20and%20Computer%20Center%20-UFCG!5e0!3m2!1sen!2sbr!4v1758985611358!5m2!1sen!2sbr"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <form id="contact-form">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Seu Nome</label>
-                                <input type="text" class="form-control" id="name" required>
+                                <label for="name" class="form-label" style="color: #ffffff;">Seu Nome</label>
+                                <input type="text" class="form-control" id="name" required autocomplete="off">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Seu Email</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <label for="email" class="form-label" style="color: #ffffff;">Seu Email</label>
+                                <input type="email" class="form-control" id="email" required autocomplete="off">
                             </div>
                             <div class="mb-3">
-                                <label for="subject" class="form-label">Assunto</label>
-                                <input type="text" class="form-control" id="subject" required>
+                                <label for="subject" class="form-label" style="color: #ffffff;">Assunto</label>
+                                <input type="text" class="form-control" id="subject" required autocomplete="off">
                             </div>
                             <div class="mb-3">
-                                <label for="message" class="form-label">Mensagem</label>
-                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <label for="message" class="form-label" style="color: #ffffff;">Mensagem</label>
+                                <textarea class="form-control" id="message" rows="5" required
+                                    autocomplete="off"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+                            <button type="submit" class="btn btn-light w-100">Enviar Mensagem</button>
                         </form>
                     </div>
                 </div>

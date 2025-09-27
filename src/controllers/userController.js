@@ -108,3 +108,15 @@ exports.cleanupAdminUsers = async (req, res) => {
     res.status(500).json({ message: 'Erro interno no servidor.', error: error.message });
   }
 };
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await prisma.user.findMany({
+      where: { role: 'ADMIN' },
+      select: { id: true, name: true, login: true, createdAt: true },
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro interno no servidor.' });
+  }
+};

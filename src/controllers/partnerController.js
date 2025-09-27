@@ -18,6 +18,9 @@ exports.createPartner = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'Nenhuma imagem foi enviada.' });
   }
+  if (description && description.length > 256) {
+    return res.status(400).json({ message: 'A descrição não pode ter mais de 100 caracteres.' });
+  }
 
   const imageUrl = `/uploads/partners/${req.file.filename}`;
 

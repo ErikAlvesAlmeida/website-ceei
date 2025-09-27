@@ -79,13 +79,95 @@ body {
   box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; 
 }
 
-.partner-logo img {
-  max-width: 150px; 
-  filter: grayscale(100%); 
-  transition: all 0.3s ease-in-out;
+.partner-card {
+  position: relative;
+  height: 250px; 
+  background-size: cover; 
+  background-position: center;
+  overflow: hidden; 
+  cursor: pointer;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.partner-logo:hover img {
-  filter: grayscale(0%); 
-  transform: scale(1.1); 
+.partner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color 0.4s ease; 
+}
+
+.partner-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.partner-card .partner-name {
+  color: #D9B5CC; 
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: transform 0.4s ease; 
+}
+
+.partner-card .partner-description {
+  color: #FFFFFF; 
+  opacity: 0; 
+  height: 0;  
+  overflow: hidden; 
+  transition: opacity 0.4s ease, height 0.4s ease; 
+}
+
+.partner-card:hover::before {
+  background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.partner-card:hover .partner-name {
+  transform: translateY(-15px); 
+}
+
+.partner-card:hover .partner-description {
+  opacity: 1;
+  height: 150px; 
+}
+
+.news-card-link .card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.news-card-link:hover .card {
+  transform: translateY(-5px); 
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; 
+}
+
+.position-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.position-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; 
+  background-color: var(--ceei-primary); 
+}
+
+.position-card:hover .card-title,
+.position-card:hover .card-text {
+  color: #FFFFFF !important; 
+}
+
+.highlight {
+  background-color: yellow;
+  color: black;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.highlight.current-match {
+  background-color: orange;
 }
