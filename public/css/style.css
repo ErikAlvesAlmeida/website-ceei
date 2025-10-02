@@ -171,3 +171,19 @@ body {
 .highlight.current-match {
   background-color: orange;
 }
+
+p.lead{
+  font-size: 1.5rem; 
+  line-height: 1.8; 
+  hyphens: auto; 
+  word-wrap: break-word; 
+  text-align: justify;
+}
+
+#about-text-placeholder {
+  text-align: justify !important; 
+}
+
+#post-content-body p {
+  text-align: justify !important; 
+}
