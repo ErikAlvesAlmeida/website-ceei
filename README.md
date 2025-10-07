@@ -1,6 +1,6 @@
 # Portal do Centro de Engenharia Elétrica e Informática (CEEI)
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-success)
 
 Repositório do projeto full-stack para o novo portal do CEEI da UFCG. A aplicação inclui um site público dinâmico e um painel de administração completo para gerenciamento de conteúdo.
 
