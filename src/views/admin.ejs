@@ -223,22 +223,41 @@
                         </div>
                         <div class="card-body">
                             <form id="position-form">
+                                <input type="hidden" id="position-id-input">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label for="position-memberName-input" class="form-label">Nome do Membro</label>
                                         <input type="text" class="form-control" id="position-memberName-input" required>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="position-title-input" class="form-label">Cargo</label>
-                                        <input type="text" class="form-control" id="position-title-input" required>
+                                        <label for="position-title-input" class="form-label">Cargo Hierárquico</label>
+                                        <select class="form-select" id="position-title-input" required>
+                                            <option value="" selected disabled>Selecione um cargo...</option>
+                                            <option value="DIRETOR">Diretor</option>
+                                            <option value="VICE_DIRETOR">Vice-Diretor</option>
+                                            <option value="COORDENADOR">Coordenador</option>
+                                            <option value="PROFESSOR">Professor</option>
+                                            <option value="CORPO_TECNICO">Corpo Técnico</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3" id="position-title-detail-group" style="display: none;">
+                                        <label for="position-title-detail-input" class="form-label">Detalhe do Cargo
+                                            (ex: "DE GRADUAÇÃO")</label>
+                                        <input type="text" class="form-control" id="position-title-detail-input">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="position-image-input" class="form-label">Foto do Membro</label>
-                                    <input type="file" class="form-control" id="position-image-input" accept="image/*"
-                                        required>
+                                    <label for="position-image-input" class="form-label">Foto do Membro
+                                        (Opcional)</label>
+                                    <input type="file" class="form-control" id="position-image-input" accept="image/*">
+                                    <small class="form-text text-muted">Se nenhuma imagem for enviada, uma imagem padrão
+                                        será usada.</small>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Adicionar Membro</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-light" id="cancel-edit-position-btn"
+                                    style="display: none;">Cancelar Edição</button>
                             </form>
                             <div id="position-feedback" class="mt-3"></div>
                         </div>

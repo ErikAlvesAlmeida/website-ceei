@@ -43,11 +43,12 @@ model Partner {
 }
 
 model Position {
-  id         Int      @id @default(autoincrement())
-  memberName String  
-  title      String  
-  imageUrl   String
-  createdAt  DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  memberName  String
+  title       PositionTitle
+  titleDetail String?   
+  imageUrl    String?
+  createdAt   DateTime @default(now())
 }
 
 model SiteInfo {
@@ -57,4 +58,12 @@ model SiteInfo {
   contactPhone2 String? 
   contactEmail  String
   updatedAt     DateTime @updatedAt
+}
+
+enum PositionTitle {
+  DIRETOR
+  VICE_DIRETOR
+  COORDENADOR
+  PROFESSOR
+  CORPO_TECNICO
 }

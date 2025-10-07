@@ -136,13 +136,21 @@ async function loadPositionsPage() {
       container.innerHTML = '<p class="text-center">Nenhum membro da administração cadastrado.</p>';
     } else {
       positions.forEach(pos => {
+        // --- LÓGICA DE FORMATAÇÃO DO TÍTULO ---
+        let displayTitle = pos.title.replace('_', ' ').toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+
+        if (pos.title === 'COORDENADOR' && pos.titleDetail) {
+          displayTitle = `${displayTitle} ${pos.titleDetail}`;
+        }
+        // --- FIM DA LÓGICA ---
+
         const positionCard = `
           <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card text-center border-0 shadow-sm h-100 position-card bg-ceei-primary">
               <img src="${pos.imageUrl}" class="card-img-top p-4" alt="${pos.memberName}" style="object-fit: contain; height: 200px;">
               <div class="card-body">
                 <h5 class="card-title text-white">${pos.memberName}</h5>
-                <p class="card-text text-white">${pos.title}</p>
+                <p class="card-text text-white">${displayTitle}</p>
               </div>
             </div>
           </div>

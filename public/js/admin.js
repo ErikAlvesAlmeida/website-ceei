@@ -205,29 +205,53 @@ async function handleDeletePartner(partnerId) {
     alert(error.message);
   }
 }
+
 function setupPositionManagement() {
   const form = document.getElementById('position-form');
-  form.addEventListener('submit', handleAddPosition);
+  form.addEventListener('submit', handleSavePosition);
+  
+  const cancelBtn = document.getElementById('cancel-edit-position-btn');
+  cancelBtn.addEventListener('click', resetPositionForm);
+
+  const titleSelect = document.getElementById('position-title-input');
+  titleSelect.addEventListener('change', (e) => {
+    const detailGroup = document.getElementById('position-title-detail-group');
+    if (e.target.value === 'COORDENADOR') {
+      detailGroup.style.display = 'block';
+    } else {
+      detailGroup.style.display = 'none';
+      document.getElementById('position-title-detail-input').value = ''; 
+    }
+  });
 }
 
+// Em public/js/admin.js, substitua apenas esta função
 async function loadPositions() {
   const tableBody = document.getElementById('positions-table-body');
   tableBody.innerHTML = '<tr><td colspan="4">Carregando...</td></tr>';
   try {
     const response = await fetch('/api/positions');
-    if (!response.ok) throw new Error('Falha ao carregar cargos.');
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || `Falha ao carregar cargos. Status: ${response.status}`);
+    }
+    
     const positions = await response.json();
+    console.log("Dados de Cargos recebidos da API:", positions);
+
     tableBody.innerHTML = '';
     if (positions.length === 0) {
       tableBody.innerHTML = '<tr><td colspan="4">Nenhum cargo cadastrado.</td></tr>';
     } else {
       positions.forEach(pos => {
         const row = document.createElement('tr');
+        const fullTitle = pos.titleDetail ? `${pos.title.replace('_', ' ')} ${pos.titleDetail}` : pos.title.replace('_', ' ');
         row.innerHTML = `
-          <td><img src="${pos.imageUrl}" alt="${pos.memberName}" width="40" class="rounded-circle"></td>
+          <td><img src="${pos.imageUrl}" alt="${pos.memberName}" width="40" height="40" class="rounded-circle" style="object-fit: cover;"></td>
           <td>${pos.memberName}</td>
-          <td>${pos.title}</td>
+          <td>${fullTitle}</td>
           <td>
+            <button class="btn btn-secondary btn-sm" onclick="handleEditPosition(${pos.id})">Editar</button>
             <button class="btn btn-danger btn-sm" onclick="handleDeletePosition(${pos.id})">Excluir</button>
           </td>
         `;
@@ -239,51 +263,96 @@ async function loadPositions() {
   }
 }
 
-async function handleAddPosition(e) {
+async function handleSavePosition(e) {
   e.preventDefault();
   const token = sessionStorage.getItem('token');
   const feedbackDiv = document.getElementById('position-feedback');
-  const form = e.target;
+  const positionId = document.getElementById('position-id-input').value;
 
   const formData = new FormData();
   formData.append('memberName', document.getElementById('position-memberName-input').value);
   formData.append('title', document.getElementById('position-title-input').value);
-  formData.append('image', document.getElementById('position-image-input').files[0]);
+  formData.append('titleDetail', document.getElementById('position-title-detail-input').value);
+  
+  const imageFile = document.getElementById('position-image-input').files[0];
+  if (imageFile) {
+    formData.append('image', imageFile);
+  }
+
+  const isEditing = !!positionId;
+  const url = isEditing ? `/api/positions/${positionId}` : '/api/positions';
+  const method = isEditing ? 'PATCH' : 'POST';
 
   try {
-    const response = await fetch('/api/positions', {
-      method: 'POST',
+    const response = await fetch(url, {
+      method: method,
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData
     });
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'Falha ao adicionar membro.');
+      throw new Error(errorData.message || 'Falha ao salvar membro.');
     }
-    feedbackDiv.innerHTML = `<div class="alert alert-success">Membro adicionado com sucesso!</div>`;
-    form.reset();
+    feedbackDiv.innerHTML = `<div class="alert alert-success">Membro salvo com sucesso!</div>`;
+    resetPositionForm();
     loadPositions();
   } catch (error) {
     feedbackDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
   }
 }
 
-async function handleDeletePosition(positionId) {
-  if (!confirm('Tem certeza que deseja excluir este membro?')) return;
-  const token = sessionStorage.getItem('token');
-  try {
-    const response = await fetch(`/api/positions/${positionId}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Falha ao excluir membro.');
+async function handleEditPosition(positionId) {
+    resetPositionForm();
+    try {
+        const response = await fetch(`/api/positions`);
+        if(!response.ok) throw new Error('Falha ao buscar dados do membro.');
+        const positions = await response.json();
+        const position = positions.find(p => p.id === positionId);
+
+        if(position) {
+            document.querySelector('#positions-view .card-header').textContent = 'Editar Membro';
+            document.getElementById('position-id-input').value = position.id;
+            document.getElementById('position-memberName-input').value = position.memberName;
+            document.getElementById('position-title-input').value = position.title;
+            
+            const detailGroup = document.getElementById('position-title-detail-group');
+            if (position.title === 'COORDENADOR') {
+                detailGroup.style.display = 'block';
+                document.getElementById('position-title-detail-input').value = position.titleDetail || '';
+            } else {
+                detailGroup.style.display = 'none';
+            }
+
+            document.getElementById('cancel-edit-position-btn').style.display = 'inline-block';
+            document.querySelector('#positions-view .card-header').scrollIntoView({ behavior: 'smooth' });
+        }
+    } catch(error) {
+        alert(error.message);
     }
-    loadPositions();
-  } catch (error) {
-    alert(error.message);
-  }
+}
+
+function resetPositionForm() {
+    document.getElementById('position-form').reset();
+    document.getElementById('position-id-input').value = '';
+    document.querySelector('#positions-view .card-header').textContent = 'Adicionar Novo Membro';
+    document.getElementById('cancel-edit-position-btn').style.display = 'none';
+    document.getElementById('position-title-detail-group').style.display = 'none';
+    document.getElementById('position-feedback').innerHTML = '';
+}
+
+async function handleDeletePosition(positionId) {
+    if (!confirm('Tem certeza que deseja excluir este membro?')) return;
+    const token = sessionStorage.getItem('token');
+    try {
+        const response = await fetch(`/api/positions/${positionId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.message); }
+        loadPositions();
+    } catch (error) {
+        alert(error.message);
+    }
 }
 function setupPostManagement() {
   const form = document.getElementById('post-form');
