@@ -34,7 +34,7 @@ O projeto é configurado para rodar de forma containerizada, se comunicando com 
 
 **1. Clone o Repositório**
 ```bash
-git clone [https://github.com/ErikAlvesAlmeida/website-ceei](https://github.com/ErikAlvesAlmeida/website-ceei)
+git clone https://github.com/ErikAlvesAlmeida/website-ceei
 cd website-ceei
 ```
 
