@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.render('index', { pageTitle: 'CEEI - Início' });
 });
 
-// Usar as Rotas da API
+//Rotas da API
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
