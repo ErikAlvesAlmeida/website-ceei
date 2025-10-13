@@ -1,0 +1,20 @@
+# .dockerignore
+
+# Ignora a pasta de dependências locais. O Docker irá instalar as suas próprias.
+node_modules
+
+# Ignora arquivos de log do npm e outros gerenciadores
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# CRÍTICO: Ignora o arquivo de variáveis de ambiente para não expor segredos na imagem.
+.env
+
+# Ignora a pasta de configuração do Git
+.git
+
+# Ignora arquivos de configuração de IDEs
+.vscode
+.idea

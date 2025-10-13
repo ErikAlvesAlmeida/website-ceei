@@ -2,12 +2,21 @@ IMAGE_NAME=website-ceei
 CONTAINER_NAME=website-ceei
 
 start:
-	docker build -t $(IMAGE_NAME) . 
-	docker run -d --name $(CONTAINER_NAME) -p 3000:3000 $(IMAGE_NAME)
+	docker compose up --build -d
 
 stop:
 	docker stop $(CONTAINER_NAME) && docker rm $(CONTAINER_NAME)
 
 restart:
-	$(MAKE) stop
-	$(MAKE) start
+	docker compose down
+	docker compose up --build -d
+
+run:
+	docker compose up --build
+
+down:
+	docker compose down
+
+logs:
+	docker compose logs -f
+	docker compose logs -f

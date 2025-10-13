@@ -2,35 +2,26 @@
 
 ![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-success)
 
-Repositório do projeto full-stack para o novo portal do CEEI da UFCG. A aplicação é containerizada com Docker para garantir portabilidade e consistência entre os ambientes de desenvolvimento e produção.
+Repositório do projeto full-stack para o novo portal do CEEI da UFCG. A aplicação é totalmente containerizada com Docker, garantindo portabilidade e um ambiente de desenvolvimento e produção consistente.
 
-## Principais Funcionalidades
-
-- **Visualização Pública:** Landing page, Blog com posts individuais, página de Cargos.
-- **Painel de Administração Seguro:** Interface completa para gerenciamento de conteúdo e usuários.
-- **Autenticação e Autorização:** Sistema seguro baseado em Tokens (JWT) com papéis (MASTER, ADMIN).
-- **CRUD Completo:** Gerenciamento de Posts, Parceiros, Cargos, Usuários e informações globais do site.
-
-## Tecnologias Utilizadas
+## Tecnologias
 
 - **Containerização:** Docker, Docker Compose
 - **Backend:** Node.js, Express.js, Prisma, JWT, Bcrypt.js, Multer, Nodemailer
-- **Banco de Dados:** MySQL
+- **Banco de Dados:** MySQL 8.0 (via imagem Docker)
 - **Frontend:** EJS, Vanilla JavaScript, Bootstrap 5, CSS3
-- **Ambiente de Desenvolvimento:** WSL (Ubuntu), NVM, Git
 
 ## Pré-requisitos
 
-1.  **Docker Desktop:** Essencial para construir e rodar a aplicação. [Guia de Instalação](https://www.docker.com/products/docker-desktop/).
-2.  **Make:** Ferramenta de automação para simplificar os comandos Docker.
-    * **Windows (via WSL/Ubuntu):** O Make geralmente já vem instalado. Para garantir, rode: `sudo apt-get update && sudo apt-get install make`
-    * **macOS (via Homebrew):** `brew install make`
-3.  **Servidor MySQL:** Um servidor MySQL rodando na máquina host (fora do Docker), como o provido pelo **XAMPP** ou **MySQL Community Server**.
-4.  **Git:** Para clonar o repositório.
+Para rodar este projeto, você precisa ter apenas duas ferramentas instaladas:
+1.  **Docker e Docker Compose:** Essencial para construir e orquestrar os contêineres. [Guia de Instalação do Docker Desktop](https://www.docker.com/products/docker-desktop/).
+2.  **Git:** Para clonar o repositório.
 
-## Como Rodar o Projeto com Docker
+**Você não precisa instalar Node.js, NPM ou MySQL na sua máquina.** O Docker cuida de tudo.
 
-O projeto é configurado para rodar de forma containerizada, se comunicando com um banco de dados na sua máquina local (host).
+## Como Rodar o Projeto Localmente
+
+Siga os passos abaixo para configurar e executar o projeto.
 
 **1. Clone o Repositório**
 ```bash
@@ -38,61 +29,67 @@ git clone https://github.com/ErikAlvesAlmeida/website-ceei
 cd website-ceei
 ```
 
-**2. Configure o Banco de Dados Host**
-- Inicie seu servidor MySQL (via XAMPP, etc.) e garanta que ele esteja rodando na porta `3306`.
-- Crie um banco de dados vazio com o nome `mydb`.
-- **Importante:** Certifique-se de que seu usuário do banco (ex: `root`) permite conexões de `host.docker.internal`. No XAMPP, isso geralmente já é o padrão.
+**2. Configure as Variáveis de Ambiente**
+O projeto precisa de um arquivo `.env` para as credenciais.
 
-**3. Configure as Variáveis de Ambiente**
-- Crie uma cópia do arquivo de exemplo `.env.example`:
+- Crie uma cópia do arquivo de exemplo:
   ```bash
   cp .env.example .env
   ```
-- Abra o arquivo `.env` e preencha **todas** as variáveis, especialmente as credenciais do banco de dados e do serviço de email. A `DATABASE_URL` deve usar `host.docker.internal` para se conectar ao MySQL do seu computador.
+- **Abra o arquivo `.env`** e preencha todas as variáveis. É crucial definir `MYSQL_ROOT_PASSWORD` (pode ser qualquer senha, como `rootpassword`) e as credenciais de email.
 
-**4. Construa a Imagem e Inicie o Contêiner**
-O `Makefile` simplifica este processo. O comando `make start` irá construir a imagem Docker e iniciar o contêiner em modo "detached" (segundo plano).
+**3. Suba os Contêineres**
+Este comando irá construir as imagens, criar a rede, os volumes e iniciar os contêineres do backend e do banco de dados em segundo plano.
 
 ```bash
 make start
 ```
-Após o comando terminar, o servidor estará rodando em `http://localhost:3000`.
+Aguarde cerca de um minuto para que o banco de dados seja totalmente inicializado. Você pode verificar o status com `docker compose ps`.
 
-**5. Prepare o Banco de Dados (Primeira Execução)**
-Após iniciar o contêiner pela primeira vez, você precisa executar as migrações do Prisma para criar as tabelas e popular o banco com os dados iniciais.
+**4. Prepare o Banco de Dados (Primeira Execução)**
+Após os contêineres estarem no ar, execute os comandos do Prisma **dentro** do contêiner da aplicação para criar as tabelas e popular os dados.
 
 - Execute a migração:
   ```bash
-  docker exec website-ceei npx prisma migrate deploy
+  docker compose exec app npx prisma migrate deploy
   ```
 - Execute o seed:
   ```bash
-  docker exec website-ceei npx prisma db seed
+  docker compose exec app npx prisma db seed
   ```
-*(Onde `website-ceei` é o `CONTAINER_NAME` definido no seu Makefile).*
 
-## Comandos Úteis (Makefile)
+**5. Acesse o Site**
+Pronto! A aplicação estará rodando em `http://localhost:3000`.
 
-- **Iniciar o projeto:** Constrói a imagem (se não existir) e inicia o contêiner.
+## Comandos Úteis (`Makefile`)
+
+Para simplificar o gerenciamento do ambiente Docker, você pode usar o `Makefile` (requer `make` instalado no seu sistema).
+
+- **Iniciar o projeto:**
   ```bash
   make start
   ```
 
-- **Parar e remover o projeto:** Para o contêiner e o remove.
+- **Parar e remover os contêineres:**
   ```bash
-  make stop
+  make down
   ```
 
-- **Reiniciar o projeto:** Para, remove e inicia novamente.
+- **Ver os logs em tempo real:**
   ```bash
-  make restart
+  make logs
   ```
 
-- **Ver logs:** Para acompanhar os logs da aplicação em tempo real.
-  ```bash
-  docker logs -f website-ceei
-  ```
+<br>
+<details>
+<summary><strong>Estrutura dos Arquivos Docker</strong></summary>
 
+- **`Dockerfile`:** Define a receita para construir a imagem da aplicação Node.js. Usa um build multi-estágio para otimização, instala dependências e prepara a aplicação para produção.
+- **`docker-compose.yml`:** Orquestra os serviços `app` (backend) e `db` (banco de dados), definindo a rede, volumes, portas e variáveis de ambiente para cada um. Utiliza `healthcheck` para garantir que a aplicação só inicie após o banco de dados estar pronto.
+- **`.dockerignore`:** Lista os arquivos e pastas a serem ignorados durante o processo de build da imagem, tornando-a mais leve e segura.
+- **`Makefile`:** Contém atalhos para os comandos mais comuns do `docker-compose`.
+
+</details>
 <br>
 <details>
 <summary><strong>Principais Rotas da API</strong></summary>

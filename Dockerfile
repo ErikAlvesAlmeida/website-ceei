@@ -1,15 +1,17 @@
-FROM node:20-alpine
+FROM node:18-slim
+
+RUN apt-get update && apt-get install -y openssl
 
 WORKDIR /app
 
-RUN apk add --no-cache openssl
-
 COPY package*.json ./
+COPY prisma ./prisma/
+
 RUN npm install
+RUN npx prisma generate
 
 COPY . .
 
-RUN npx prisma generate
 
 EXPOSE 3000
 
