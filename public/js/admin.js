@@ -632,6 +632,26 @@ async function handleDeleteAdmin(userId) {
 function setupProfileForm() {
     const form = document.getElementById('profile-form');
     form.addEventListener('submit', handleUpdateProfile);
+
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('profile-password-input');
+    togglePassword.addEventListener('click', () => {
+        togglePasswordVisibility(passwordInput, togglePassword);
+    });
+
+    const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+    const confirmPasswordInput = document.getElementById('profile-confirm-password-input');
+    toggleConfirmPassword.addEventListener('click', () => {
+        togglePasswordVisibility(confirmPasswordInput, toggleConfirmPassword);
+    });
+}
+
+function togglePasswordVisibility(input, toggleElement) {
+    const icon = toggleElement.querySelector('i');
+    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+    input.setAttribute('type', type);
+    icon.classList.toggle('bi-eye-slash');
+    icon.classList.toggle('bi-eye-fill');
 }
 
 async function loadProfileData() {
@@ -645,10 +665,23 @@ async function handleUpdateProfile(e) {
     e.preventDefault();
     const token = sessionStorage.getItem('token');
     const feedbackDiv = document.getElementById('profile-feedback');
+    feedbackDiv.innerHTML = ''; 
+
+    const passwordInput = document.getElementById('profile-password-input');
+    const confirmPasswordInput = document.getElementById('profile-confirm-password-input');
+    
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (password !== confirmPassword) {
+        feedbackDiv.innerHTML = `<div class="alert alert-danger">As novas senhas não coincidem.</div>`;
+        return; 
+    }
+    
     const dataToUpdate = {
         name: document.getElementById('profile-name-input').value,
     };
-    const password = document.getElementById('profile-password-input').value;
+
     if (password) {
         dataToUpdate.password = password;
     }
@@ -660,10 +693,14 @@ async function handleUpdateProfile(e) {
             body: JSON.stringify(dataToUpdate)
         });
         if (!response.ok) { const errorData = await response.json(); throw new Error(errorData.message); }
+        
         const updatedUser = await response.json();
         sessionStorage.setItem('userName', updatedUser.name);
         feedbackDiv.innerHTML = `<div class="alert alert-success">Perfil atualizado com sucesso!</div>`;
-        document.getElementById('profile-password-input').value = '';
+
+        passwordInput.value = '';
+        confirmPasswordInput.value = '';
+
     } catch (error) {
         feedbackDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
     }

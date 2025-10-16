@@ -18,6 +18,10 @@ body {
   background-color: #0174AF; 
 }
 
+section[id] {
+  scroll-margin-top: 76px; 
+}
+
 .hero-section {
   position: relative;
   min-height: 65vh; 
@@ -45,6 +49,21 @@ body {
 .about-card img {
   transition: transform 0.3s ease-in-out;
   border-radius: 0.5rem; 
+}
+
+/* --- Estilo Padrão para Cards de Iniciativa (Órgãos e INOVA) --- */
+
+.initiative-card-text {
+  /* A mágica para truncar o texto em 5 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Define o número máximo de linhas */
+  line-clamp: 5; /* Define o número máximo de linhas (padrão não prefixado) */
+  -webkit-box-orient: vertical;
+
+  /* Garante que a altura mínima seja consistente, mesmo com pouco texto */
+  min-height: 120px; /* Ajuste este valor se necessário */
 }
 
 .about-card:hover img {
@@ -85,7 +104,7 @@ body {
   background-size: cover; 
   background-position: center;
   overflow: hidden; 
-  cursor: pointer;
+  cursor: default;
   display: flex; 
   align-items: center;
   justify-content: center;
@@ -172,9 +191,17 @@ body {
   background-color: orange;
 }
 
-p.lead{
+p.lead {
   font-size: 1.5rem; 
   line-height: 1.8; 
+  hyphens: auto; 
+  word-wrap: break-word; 
+  text-align: justify;
+}
+
+p.lead-2 {
+  font-size: 1.2rem; 
+  line-height: 1.5; 
   hyphens: auto; 
   word-wrap: break-word; 
   text-align: justify;

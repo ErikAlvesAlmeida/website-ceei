@@ -16,8 +16,9 @@ exports.sendContactEmail = async (req, res) => {
   }
 
   const mailOptions = {
-    from: `"${name}" <${email}>`, 
-    to: process.env.EMAIL_TO,          
+    from: `"${name}" <${process.env.EMAIL_USER}>`, 
+    to: process.env.EMAIL_TO,       
+    replyTo: email,   
     subject: `[Contato Site CEEI] - ${subject}`,
     html: `
       <p>Você recebeu uma nova mensagem do site do CEEI:</p>
