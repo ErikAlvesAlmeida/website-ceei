@@ -527,7 +527,30 @@ function resetPostForm() {
 
 function setupUserManagement() {
   const form = document.getElementById('add-admin-form');
-  form.addEventListener('submit', handleAddAdmin);
+  if (form) {
+    form.addEventListener('submit', handleAddAdmin);
+  }
+
+  const generateBtn = document.getElementById('generate-password-btn');
+  const passwordInput = document.getElementById('admin-password-input');
+
+  if (generateBtn && passwordInput) {
+    generateBtn.addEventListener('click', () => {
+      const newPassword = generateRandomPassword(8);
+      passwordInput.value = newPassword;
+      passwordInput.type = 'text'; 
+    });
+  }
+}
+
+function generateRandomPassword(length) {
+  const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
 }
 
 async function loadAdmins() {
@@ -555,11 +578,6 @@ async function loadAdmins() {
   } catch (error) {
     tableBody.innerHTML = `<tr><td colspan="3" class="text-danger">${error.message}</td></tr>`;
   }
-}
-
-function setupUserManagement() {
-  const form = document.getElementById('add-admin-form');
-  form.addEventListener('submit', handleAddAdmin);
 }
 
 async function loadAdmins() {

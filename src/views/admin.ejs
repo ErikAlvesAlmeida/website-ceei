@@ -87,9 +87,16 @@
                                     <div class="col-md-6 mb-3"><label for="admin-birthdate" class="form-label">Data de
                                             Nascimento</label><input type="date" class="form-control"
                                             id="admin-birthdate-input" required></div>
-                                    <div class="col-md-6 mb-3"><label for="admin-password" class="form-label">Senha
-                                            Provisória</label><input type="password" class="form-control"
-                                            id="admin-password-input" required></div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="admin-password-input" class="form-label">Senha Provisória</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="admin-password-input"
+                                                required>
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                id="generate-password-btn" title="Gerar Senha Aleatória">
+                                                <i class="bi bi-key-fill"></i> </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Adicionar Admin</button>
                             </form>
