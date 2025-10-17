@@ -22,12 +22,34 @@ section[id] {
   scroll-margin-top: 76px; 
 }
 
-.hero-section {
+.hero-section1 {
   position: relative;
   min-height: 65vh; 
   background: url('/images/capaCEEI.jpg') no-repeat center center;
   background-size: cover;
   color: white;
+}
+
+.hero-section {
+  position: relative; 
+  min-height: 85vh;
+  color: white;
+  overflow: hidden; 
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; 
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
 }
 
 .hero-section::before {
@@ -38,32 +60,29 @@ section[id] {
   right: 0;
   bottom: 0;
   background-color: #0174AF; 
-  opacity: 0.7; 
+  opacity: 0.5; 
+  z-index: 1; 
 }
 
 .hero-content {
   position: relative; 
-  z-index: 1;
+  z-index: 2; 
+}
+
+.hero-section1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0174AF; 
+  opacity: 0.7; 
 }
 
 .about-card img {
   transition: transform 0.3s ease-in-out;
   border-radius: 0.5rem; 
-}
-
-/* --- Estilo Padrão para Cards de Iniciativa (Órgãos e INOVA) --- */
-
-.initiative-card-text {
-  /* A mágica para truncar o texto em 5 linhas */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5; /* Define o número máximo de linhas */
-  line-clamp: 5; /* Define o número máximo de linhas (padrão não prefixado) */
-  -webkit-box-orient: vertical;
-
-  /* Garante que a altura mínima seja consistente, mesmo com pouco texto */
-  min-height: 120px; /* Ajuste este valor se necessário */
 }
 
 .about-card:hover img {
