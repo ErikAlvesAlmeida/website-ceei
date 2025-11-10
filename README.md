@@ -43,22 +43,13 @@ Este comando irá construir as imagens, criar a rede, os volumes e iniciar os co
 
 ```bash
 make start
+# ou
+docker compose up --build -d
 ```
 Aguarde cerca de um minuto para que o banco de dados seja totalmente inicializado. Você pode verificar o status com `docker compose ps`.
 
-**4. Prepare o Banco de Dados (Primeira Execução)**
-Após os contêineres estarem no ar, execute os comandos do Prisma **dentro** do contêiner da aplicação para criar as tabelas e popular os dados.
 
-- Execute a migração:
-  ```bash
-  docker compose exec app npx prisma migrate deploy
-  ```
-- Execute o seed:
-  ```bash
-  docker compose exec app npx prisma db seed
-  ```
-
-**5. Acesse o Site**
+**4. Acesse o Site**
 Pronto! A aplicação estará rodando em `http://localhost:3000`.
 
 ## Comandos Úteis (`Makefile`)
