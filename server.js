@@ -34,6 +34,15 @@ app.use('/api/site-info', siteInfoRoutes);
 app.use('/', adminRoutes);
 app.use('/api/contact', formRoutes);
 
+// ===== MIDDLEWARES DE ERRO =====
+// Middleware 404 - Página não encontrada
+app.use((req, res) => {
+    res.status(404).render('404', { 
+        pageTitle: 'CEEI - Página não encontrada',
+        url: req.originalUrl 
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}. Acesse em http://localhost:${PORT}`);
