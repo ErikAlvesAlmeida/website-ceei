@@ -328,14 +328,31 @@ function setupInPageSearch() {
   }
 }
 
+// Função global para receber o token do Turnstile
+window.onTurnstileCallback = function(token) {
+  console.log('Token Turnstile recebido:', token);
+  document.getElementById('cf-turnstile-response').value = token;
+};
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.innerHTML;
+    
+    // Pega o token do Turnstile
+    const turnstileToken = document.getElementById('cf-turnstile-response').value;
+    
+    // Valida se o token existe
+    if (!turnstileToken) {
+      alert('Por favor, complete a verificação de segurança.');
+      return;
+    }
+    
     submitButton.disabled = true;
     submitButton.innerHTML = 'Enviando...';
 
@@ -344,6 +361,7 @@ function setupContactForm() {
       email: document.getElementById('email').value,
       subject: document.getElementById('subject').value,
       message: document.getElementById('message').value,
+      'cf-turnstile-response': turnstileToken, // Adiciona o token
     };
 
     try {
@@ -353,12 +371,25 @@ function setupContactForm() {
         body: JSON.stringify(data),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.message);
+      if (!response.ok) throw new Error(result.message || result.error);
 
       alert('Mensagem enviada com sucesso!');
       form.reset();
+      
+      // Reseta o Turnstile após envio bem-sucedido
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
+      
     } catch (error) {
+      console.error('Erro ao enviar:', error);
       alert(`Erro: ${error.message}`);
+      
+      // Reseta o Turnstile em caso de erro também
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
+      
     } finally {
       submitButton.disabled = false;
       submitButton.innerHTML = originalButtonText;
